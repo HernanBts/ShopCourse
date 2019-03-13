@@ -5,7 +5,7 @@
     using System.Threading.Tasks;
     using Entities;
 
-    public class Repository
+    public class Repository : IRepository
     {
         private readonly DataContext context;
 
@@ -14,7 +14,7 @@
             this.context = context;
         }
 
-        public IEnumerable<Product> GetProductos()
+        public IEnumerable<Product> GetProducts()
         {
             return this.context.Products.OrderBy(p => p.Name);
         }

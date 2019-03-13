@@ -20,7 +20,7 @@
         {
             await this.context.Database.EnsureCreatedAsync();
             
-            if(!this.context.Productos.Any())
+            if(!this.context.Products.Any())
             {
                 this.AddProduct("iPhone X");
                 this.AddProduct("MacBook Air");
@@ -31,7 +31,7 @@
 
         private void AddProduct(string name)
         {
-            this.context.Productos.Add(new Product
+            this.context.Products.Add(new Product
             {
                 Name = name,
                 Price = this.random.Next(1000),

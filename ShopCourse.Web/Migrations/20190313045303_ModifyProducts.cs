@@ -9,7 +9,7 @@ namespace ShopCourse.Web.Migrations
         {
             migrationBuilder.AlterColumn<string>(
                 name: "Name",
-                table: "Productos",
+                table: "Products",
                 maxLength: 50,
                 nullable: false,
                 oldClrType: typeof(string),
@@ -17,13 +17,13 @@ namespace ShopCourse.Web.Migrations
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "LastSale",
-                table: "Productos",
+                table: "Products",
                 nullable: true,
                 oldClrType: typeof(DateTime));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "LastPurchase",
-                table: "Productos",
+                table: "Products",
                 nullable: true,
                 oldClrType: typeof(DateTime));
         }
@@ -32,21 +32,21 @@ namespace ShopCourse.Web.Migrations
         {
             migrationBuilder.AlterColumn<string>(
                 name: "Name",
-                table: "Productos",
+                table: "Products",
                 nullable: true,
                 oldClrType: typeof(string),
                 oldMaxLength: 50);
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "LastSale",
-                table: "Productos",
+                table: "Products",
                 nullable: false,
                 oldClrType: typeof(DateTime),
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "LastPurchase",
-                table: "Productos",
+                table: "Products",
                 nullable: false,
                 oldClrType: typeof(DateTime),
                 oldNullable: true);

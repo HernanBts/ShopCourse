@@ -5,7 +5,7 @@ namespace ShopCourse.Web.Data
 {
     public class DataContext : DbContext
     {
-        public DbSet<Product> Productos { get; set; }
+        public DbSet<Product> Products { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {

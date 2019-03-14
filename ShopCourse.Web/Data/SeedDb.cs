@@ -5,17 +5,18 @@
     using System.Threading.Tasks;
     using Entities;
     using Microsoft.AspNetCore.Identity;
+    using Helpers;
 
     public class SeedDb
     {
         private readonly DataContext context;
-        private readonly UserManager<User> userManager;
+        private readonly IUserHelper userHelper;
         private Random random;
 
-        public SeedDb(DataContext context, UserManager<User> userManager)
+        public SeedDb(DataContext context, IUserHelper userHelper)
         {
             this.context = context;
-            this.userManager = userManager;
+            this.userHelper = userHelper;
             this.random = new Random();
         }
 
@@ -23,29 +24,31 @@
         {
             await this.context.Database.EnsureCreatedAsync();
 
-            var user = await this.userManager.FindByEmailAsync("admin@shop.com");
-            if(user == null)
+            // Add user
+            var user = await this.userHelper.GetUserByEmailAsync("admin@shop.com");
+            if (user == null)
             {
                 user = new User
                 {
-                    FirstName = "Admin",
-                    LastName = "Super",
+                    FirstName = "Super",
+                    LastName = "Admin",
                     Email = "admin@shop.com",
                     UserName = "admin@shop.com",
-                    PhoneNumber = "3624508281"
+                    PhoneNumber = "admin"
                 };
 
-                var result = await this.userManager.CreateAsync(user, "admin");
+                var result = await this.userHelper.AddUserAsync(user, "admin");
                 if (result != IdentityResult.Success)
                 {
                     throw new InvalidOperationException("Could not create the user in seeder");
                 }
             }
 
-            if(!this.context.Products.Any())
+            // Add products
+            if (!this.context.Products.Any())
             {
                 this.AddProduct("iPhone X", user);
-                this.AddProduct("MacBook Air", user);
+                this.AddProduct("Magic Mouse", user);
                 this.AddProduct("iWatch Series 4", user);
                 await this.context.SaveChangesAsync();
             }

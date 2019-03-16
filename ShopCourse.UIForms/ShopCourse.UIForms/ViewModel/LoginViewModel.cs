@@ -1,6 +1,7 @@
 ﻿namespace ShopCourse.UIForms.ViewModel
 {
     using GalaSoft.MvvmLight.Command;
+    using ShopCourse.UIForms.Views;
     using System.Windows.Input;
     using Xamarin.Forms;
 
@@ -12,6 +13,11 @@
 
         public ICommand LoginCommand => new RelayCommand(this.Login);
 
+        public LoginViewModel()
+        {
+            this.Email = "admin@shop.com";
+            this.Password = "admin";
+        }
         private async void Login()
         {
             if (string.IsNullOrEmpty(this.Email))
@@ -35,8 +41,11 @@
                 return;
             }
 
-            await Application.Current.MainPage.DisplayAlert(
-                "Success", "Fuck yeah!!!", "Accept");
+            //await Application.Current.MainPage.DisplayAlert(
+            //    "Success", "Fuck yeah!!!", "Accept");
+
+            MainViewModel.GetInstance().Products = new ProductsViewModel();
+            await Application.Current.MainPage.Navigation.PushAsync(new ProductsPage());
         }
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ShopCourse.Common.Models
+﻿namespace ShopCourse.Common.Models
 {
     public class Response
     {

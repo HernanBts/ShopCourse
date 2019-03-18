@@ -1,6 +1,6 @@
-﻿using Newtonsoft.Json;
-namespace ShopCourse.Common.Models
+﻿namespace ShopCourse.Common.Models
 {
+    using Newtonsoft.Json;
     using System;
 
     public class Product

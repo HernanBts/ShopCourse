@@ -40,7 +40,7 @@
                     return null;
                 }
 
-                return $"https://localhost:44380{this.ImageUrl.Substring(1)}";
+                return $"https://shopcourse-web.conveyor.cloud{this.ImageUrl.Substring(1)}";
             }
         }
     }

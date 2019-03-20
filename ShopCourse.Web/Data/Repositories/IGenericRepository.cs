@@ -1,4 +1,4 @@
-﻿namespace ShopCourse.Web.Data
+﻿namespace ShopCourse.Web.Data.Repositories
 {
     using System.Linq;
     using System.Threading.Tasks;

@@ -1,15 +1,15 @@
 ﻿namespace ShopCourse.Web.Controllers
 {
-    using System;
-    using System.IO;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using Data;
     using Data.Entities;
+    using Data.Repositories;
     using Helpers;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
+    using System;
+    using System.IO;
+    using System.Linq;
+    using System.Threading.Tasks;
     using Web.Models;
 
     public class ProductsController : Controller
@@ -47,7 +47,7 @@
             return View(product);
         }
 
-        [Authorize(Roles = "Admin")] 
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -127,7 +127,7 @@
         private ProductViewModel ToProductViewModel(Product product)
         {
             return new ProductViewModel
-            { 
+            {
                 Id = product.Id,
                 IsAvailable = product.IsAvailable,
                 LastPurchase = product.LastPurchase,

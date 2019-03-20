@@ -7,6 +7,10 @@ namespace ShopCourse.Web.Data
 {
     public class DataContext : IdentityDbContext<User>
     {
+        public DbSet<City> Cities { get; set; }
+
+        public DbSet<Country> Countries { get; set; }
+
         public DbSet<Product> Products { get; set; }
 
         public DbSet<Order> Orders { get; set; }

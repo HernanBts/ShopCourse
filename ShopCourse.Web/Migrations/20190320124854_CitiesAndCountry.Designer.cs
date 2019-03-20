@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShopCourse.Web.Data;
 
 namespace ShopCourse.Web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20190320124854_CitiesAndCountry")]
+    partial class CitiesAndCountry
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -135,32 +137,13 @@ namespace ShopCourse.Web.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CountryId");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CountryId");
 
                     b.ToTable("Cities");
-                });
-
-            modelBuilder.Entity("ShopCourse.Web.Data.Entities.Country", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Countries");
                 });
 
             modelBuilder.Entity("ShopCourse.Web.Data.Entities.Order", b =>
@@ -369,13 +352,6 @@ namespace ShopCourse.Web.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("ShopCourse.Web.Data.Entities.City", b =>
-                {
-                    b.HasOne("ShopCourse.Web.Data.Entities.Country")
-                        .WithMany("Cities")
-                        .HasForeignKey("CountryId");
                 });
 
             modelBuilder.Entity("ShopCourse.Web.Data.Entities.Order", b =>

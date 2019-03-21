@@ -1,14 +1,10 @@
-﻿using System;
-
-using Android.App;
-using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using Android.OS;
-
-namespace ShopCourse.UIForms.Droid
+﻿namespace ShopCourse.UIForms.Droid
 {
+    using Android.App;
+    using Android.Content.PM;
+    using Android.OS;
+    using Android.Runtime;
+
     [Activity(Label = "ShopCourse.UIForms", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {

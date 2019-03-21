@@ -33,25 +33,31 @@
         private async void LoadProducts()
         {
             this.IsRefreshing = true;
-            var response = await this.apiService.GetListAsync<Product>(
-                "https://shopcourse-web.conveyor.cloud",
-                "/api",
-                "/Products");
 
-            this.IsRefreshing = false;
+            var url = Application.Current.Resources["UrlAPI"].ToString();
+            var response = await this.apiService.GetListAsync<Product>(
+                url,
+                "/api",
+                "/Products",
+                "bearer",
+                MainViewModel.GetInstance().Token.Token);
+
+
 
             if (!response.IsSuccess)
             {
                 await Application.Current.MainPage.DisplayAlert(
                     "Error",
                     response.Message,
-                    "OK");
+                    "Accept");
+                this.IsRefreshing = false;
                 return;
             }
 
-            var myProducts = (List<Product>)response.Result;
-
-            this.Products = new ObservableCollection<Product>(myProducts);
+            var products = (List<Product>)response.Result;
+            this.Products = new ObservableCollection<Product>(products);
+            this.IsRefreshing = false;
         }
+
     }
 }

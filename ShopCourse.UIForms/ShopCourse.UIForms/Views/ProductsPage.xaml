@@ -4,6 +4,9 @@
              x:Class="ShopCourse.UIForms.Views.ProductsPage"
              BindingContext="{Binding Main, Source={StaticResource Locator}}" 
              Title="Products">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="ic_action_add_circle_outline" Command="{Binding AddProductCommand}"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout
             BindingContext="{Binding Products}"
@@ -16,9 +19,13 @@
                     <DataTemplate>
                         <ViewCell>
                             <Grid>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SelectProductCommand}"/>
+                                </Grid.GestureRecognizers>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <Image
                                     Grid.Column="0"
@@ -42,11 +49,11 @@
                                         Text="{Binding Stock, StringFormat='{}Stock: {0:N0}'}"
                                         TextColor="Green">
                                     </Label>
-                                    <Label
-                                        Text="{Binding ImageFullPath}"
-                                        TextColor="Black">
-                                    </Label>
                                 </StackLayout>
+                                <Image
+    	                            Grid.Column="2"
+    	                            Source="ic_arrow_right">
+                                </Image>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

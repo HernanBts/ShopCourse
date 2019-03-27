@@ -8,7 +8,7 @@
             <!-- Locator -->
             <infra:InstanceLocator x:Key="Locator"/>
             <!-- Parameters -->
-            <x:String x:Key="UrlAPI">https://shopcourse-web.conveyor.cloud</x:String>
+            <x:String x:Key="UrlAPI">https://shopbts.azurewebsites.net</x:String>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

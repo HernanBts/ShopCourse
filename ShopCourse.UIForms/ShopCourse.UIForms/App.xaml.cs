@@ -3,8 +3,12 @@
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace ShopCourse.UIForms
 {
+    using Newtonsoft.Json;
+    using ShopCourse.Common.Helpers;
+    using ShopCourse.Common.Models;
     using ShopCourse.UIForms.ViewModel;
     using ShopCourse.UIForms.Views;
+    using System;
     using Xamarin.Forms;
 
     public partial class App : Application
@@ -15,6 +19,21 @@ namespace ShopCourse.UIForms
         public App()
         {
             InitializeComponent();
+
+            if (Settings.IsRemember)
+            {
+                var token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
+                if (token.Expiration > DateTime.Now)
+                {
+                    var mainViewModel = MainViewModel.GetInstance();
+                    mainViewModel.Token = token;
+                    mainViewModel.UserEmail = Settings.UserEmail;
+                    mainViewModel.UserPassword = Settings.UserPassword;
+                    mainViewModel.Products = new ProductsViewModel();
+                    this.MainPage = new MasterPage();
+                    return;
+                }
+            }
 
             MainViewModel.GetInstance().Login = new LoginViewModel();
             this.MainPage = new NavigationPage(new LoginPage());

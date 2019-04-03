@@ -2,7 +2,10 @@
 {
     using Common.Services;
     using GalaSoft.MvvmLight.Command;
+    using Newtonsoft.Json;
+    using ShopCourse.Common.Helpers;
     using ShopCourse.Common.Models;
+    using ShopCourse.UIForms.Helpers;
     using System.Windows.Input;
     using UIForms.Views;
     using Xamarin.Forms;
@@ -29,27 +32,34 @@
 
         public string Password { get; set; }
 
+        public bool IsRemember { get; set; }
+
         public ICommand LoginCommand => new RelayCommand(this.Login);
 
         public LoginViewModel()
         {
             this.apiService = new ApiService();
             this.IsEnabled = true;
-            this.Email = "admin@shop.com";
-            this.Password = "123456";
+            this.IsRemember = false;
         }
 
         private async void Login()
         {
             if (string.IsNullOrEmpty(this.Email))
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "You must enter an email.", "Accept");
+                await Application.Current.MainPage.DisplayAlert(
+                    Languages.Error,
+                    Languages.EmailMessage,
+                    Languages.Accept);
                 return;
             }
 
             if (string.IsNullOrEmpty(this.Password))
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "You must enter a password.", "Accept");
+                await Application.Current.MainPage.DisplayAlert(
+                    Languages.Error,
+                    Languages.PasswordError,
+                    Languages.Accept);
                 return;
             }
 
@@ -74,7 +84,10 @@
 
             if (!response.IsSuccess)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "Email or password incorrect.", "Accept");
+                await Application.Current.MainPage.DisplayAlert(
+                    Languages.Error,
+                    Languages.LoginError,
+                    Languages.Accept);
                 return;
             }
 
@@ -84,6 +97,12 @@
             mainViewModel.UserPassword = this.Password;
             mainViewModel.Token = token;
             mainViewModel.Products = new ProductsViewModel();
+
+            Settings.IsRemember = this.IsRemember;
+            Settings.UserEmail = this.Email;
+            Settings.UserPassword = this.Password;
+            Settings.Token = JsonConvert.SerializeObject(token);
+
             Application.Current.MainPage = new MasterPage();
         }
     }

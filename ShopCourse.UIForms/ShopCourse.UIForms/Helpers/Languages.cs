@@ -35,5 +35,9 @@
 
         public static string Remember => Resource.Remember;
 
+        public static string RegisterNewUser => Resource.RegisterNewUser;
+
+        public static string Forgot => Resource.Forgot;
+
     }
 }

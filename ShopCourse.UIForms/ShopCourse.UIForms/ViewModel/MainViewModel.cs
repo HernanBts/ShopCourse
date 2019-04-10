@@ -8,11 +8,20 @@
     using System.Linq;
     using System.Windows.Input;
 
-    public class MainViewModel
+    public class MainViewModel : BaseViewModel
     {
         private static MainViewModel instance;
+        private User user;
+
+        public User User
+        {
+            get => this.user;
+            set => this.SetValue(ref this.user, value);
+        }
 
         public LoginViewModel Login { get; set; }
+
+        public ChangePasswordViewModel ChangePassword { get; set; }
 
         public string UserEmail { get; set; }
 
@@ -27,6 +36,12 @@
         public ObservableCollection<MenuItemViewModel> Menus { get; set; }
 
         public AddProductViewModel AddProduct { get; set; }
+
+        public RegisterViewModel Register { get; set; }
+
+        public RememberPasswordViewModel RememberPassword { get; set; }
+
+        public ProfileViewModel Profile { get; set; }
 
         public ICommand AddProductCommand => new RelayCommand(this.GoAddProduct);
 
@@ -53,14 +68,18 @@
                     PageName = "AboutPage",
                     Title = "About"
                 },
-
+                new Menu
+                {
+                    Icon = "ic_person",
+                    PageName = "ProfilePage",
+                    Title = "Modify User"
+                },
                 new Menu
                 {
                     Icon = "ic_settings",
                     PageName = "SetupPage",
                     Title = "Setup"
                 },
-
                 new Menu
                 {
                     Icon = "ic_exit_to_app",

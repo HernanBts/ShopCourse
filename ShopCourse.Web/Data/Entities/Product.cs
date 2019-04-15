@@ -40,7 +40,7 @@
                     return null;
                 }
 
-                return $"https://shopcourse-web.conveyor.cloud{this.ImageUrl.Substring(1)}";
+                return $"https://shopbts.azurewebsites.net{this.ImageUrl.Substring(1)}";
             }
         }
     }
